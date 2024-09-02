@@ -7,21 +7,12 @@ import cv2
 import imghdr
 import tensorflow as tf
 import seaborn as sns
-from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
-from sklearn.utils.class_weight import compute_class_weight
-from tensorflow.keras import layers, models, regularizers, optimizers
-from tensorflow.keras.applications import VGG16, ResNet50V2
-from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, TensorBoard, CSVLogger
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, BatchNormalization, Dropout, Flatten, Dense, Activation, GlobalAveragePooling2D
-from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.optimizers import Adam, Adamax
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.utils import plot_model
 from tensorflow.keras.models import load_model
 from keras.preprocessing.image import img_to_array
 from PIL import Image
 from collections import deque, Counter
-from google.colab import drive
 import gradio as gr
 from fpdf import FPDF 
 model = load_model('bestmodelsofar.keras')
