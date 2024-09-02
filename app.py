@@ -171,7 +171,7 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
         "U2366489"
         "Under The Supervision Of Dr.Tianhua Chen"
     ),align='C')
-    draw_page_border()
+    pdf.draw_page_border()
     # Line Plot
     pdf.add_page()
     pdf.set_font("Arial", 'B', 10)
@@ -185,7 +185,7 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
     pdf.set_y(265)
     pdf.set_font("Arial", 'I', 8)
     pdf.cell(0,8,'Report Of Emotion Analysis of Video', 0, 1, 'C')
-    draw_page_border()
+    pdf.draw_page_border()
     # Third Page: Pie Chart
     pdf.add_page()
     pdf.set_font("Arial", 'B', 14)
