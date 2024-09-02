@@ -317,7 +317,7 @@ with gr.Blocks() as demo:
         "<p style='text-align: center; margin-bottom: 20px;'>This tool will provide a detailed analysis including visualizations and a downloadable report.</p>"
     ),
     
-        gr.Image(logo,show_label=False ,interactive=False, height=165,show_download_button=False,show_fullscreen_button=False,show,show_share_button=False),
+    gr.Image(logo,show_label=False ,interactive=False, height=165,show_download_button=False,show_fullscreen_button=False,show,show_share_button=False),
     gr_interface.render()
 # Launch the interface
 demo.launch(show_error=True)
