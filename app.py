@@ -144,15 +144,13 @@ def process_video(video_path, model, output_csv="output.csv", smoothing_window=5
     cap.release()
     return df
 
-class PDF(FPDF):
-    def draw_page_border(self):
-        margin = 10  # Adjust the margin to set the border thickness
-        self.rect(margin, margin, self.w - 2 * margin, self.h - 2 * margin)
+
 
 
 def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
     pdf = FPDF()
     logo='university-of-huddersfield-239-logo.png'
+    border_margin=7
     # First Page: Title, Author Info, and Line Graph
     pdf.add_page()
     pdf.set_font("Arial", 'B', 18)
@@ -171,7 +169,7 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
         "U2366489"
         "Under The Supervision Of Dr.Tianhua Chen"
     ),align='C')
-    pdf.draw_page_border()
+    pdf.rect(border_margin, border_margin, pdf.w - 2 * border_margin, pdf.h - 2 * border_margin)
     # Line Plot
     pdf.add_page()
     pdf.set_font("Arial", 'B', 10)
@@ -185,7 +183,7 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
     pdf.set_y(265)
     pdf.set_font("Arial", 'I', 8)
     pdf.cell(0,8,'Report Of Emotion Analysis of Video', 0, 1, 'C')
-    pdf.draw_page_border()
+    pdf.rect(border_margin, border_margin, pdf.w - 2 * border_margin, pdf.h - 2 * border_margin)
     # Third Page: Pie Chart
     pdf.add_page()
     pdf.set_font("Arial", 'B', 14)
@@ -206,7 +204,7 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
     pdf.set_y(265)
     pdf.set_font("Arial", 'I', 8)
     pdf.cell(0,8,'Report Of Emotion Analysis of Video', 0, 1, 'C')
-
+    pdf.rect(border_margin, border_margin, pdf.w - 2 * border_margin, pdf.h - 2 * border_margin)
     pdf.output(pdf_path)
 
 
