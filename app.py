@@ -207,24 +207,28 @@ def generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path):
     pdf.rect(border_margin, border_margin, pdf.w - 2 * border_margin, pdf.h - 2 * border_margin)
     pdf.output(pdf_path)
 
-
 def process_and_display_video(video_path, model, smoothing_window=5):
     """
     Processes the video, generates predictions, and displays the results in a Gradio interface.
     Returns multiple outputs including plots and a downloadable PDF report.
     """
+    # Check if the video is uploaded
+    if video_path is None:
+        raise ValueError("No video uploaded. Please upload a video before submitting.")
+
     # Process the video and get predictions
     df = process_video(video_path, model, output_csv="temp_output.csv", smoothing_window=smoothing_window)
     category_mapping = {
-    'negative': -1,
-    'neutral': 0,
-    'positive': 1 }
+        'negative': -1,
+        'neutral': 0,
+        'positive': 1
+    }
     # Apply the mapping to the DataFrame
-    df['Category_Num'] = df['Category'].map(category_mapping) # Fixed indentation
+    df['Category_Num'] = df['Category'].map(category_mapping)
+
     # Create the plot
     plt.figure(figsize=(10, 6))
     sns.lineplot(x='Time (s)', y='Category_Num', data=df)
-    # Customize the plot with fixed y-axis labels
     plt.title("Emotion Category Over Time")
     plt.xlabel("Time (Second)")  # Change to seconds if not converting
     plt.ylabel("Category")
@@ -235,21 +239,17 @@ def process_and_display_video(video_path, model, smoothing_window=5):
     plt.savefig(line_plot_path)
     plt.close()
 
-
-
     # Create a bar plot of emotion counts
     df['Duration'] = df['Time (s)'].diff().shift(-1).fillna(0)
-    # Group by Category and sum the durations
     category_durations = df.groupby('Category')['Duration'].sum()
 
-    # Plotting the total duration for each category
     plt.figure(figsize=(10, 6))
     sns.barplot(x=category_durations.index, y=category_durations.values, palette='viridis')
     plt.xlabel('Emotion')
     plt.ylabel('Total Duration (seconds)')
     plt.title('Total Duration of Each Emotion Category')
     plt.xticks(rotation=45)
-    bar_plot_path = "bar_plot.png" # Dedented this line to align with the rest of the block
+    bar_plot_path = "bar_plot.png"
     plt.savefig(bar_plot_path)
     plt.close()
 
@@ -267,7 +267,10 @@ def process_and_display_video(video_path, model, smoothing_window=5):
     generate_pdf(line_plot_path, bar_plot_path, pie_chart_path, pdf_path)
 
     # Return the video, DataFrame, line plot, bar plot, pie chart, CSV file, and PDF report
-    return   line_plot_path,bar_plot_path,pie_chart_path, pdf_path, "temp_output.csv"
+    return line_plot_path, bar_plot_path, pie_chart_path, pdf_path, "temp_output.csv"
+
+
+
 
 # Load the Haar cascade for face detection (outside the function to avoid reloading)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -290,34 +293,30 @@ gr_interface = gr.Interface(
     fn=lambda video: process_and_display_video(video, model),
     inputs=inputs,
     outputs=outputs,
-    description=(
-        "Upload a video of online meeting to analyze the emotions displayed.\n\n\n"
-
-        "This tool is developed by Dirdh Patel for MSc dissertation purposes at the University of Huddersfield, "
-        "under the supervision of Dr. Tiauhan Chen. It is used solely as a prototype."
-    ),
-    article='This tool is developed by Dirdh Patel(U2366489)for MSc dissertation purposes at the University of Huddersfield',
+    article='This tool is developed by Dirdh Patel(U2366489) for MSc dissertation purposes at the University of Huddersfield Under the supervision of Dr.Tianhua Chen.',
     allow_flagging="never",
-
+    live=True,  # Ensure the video is completely uploaded before processing
 )
-
-
 
 # Create a Gradio layout with custom CSS
 with gr.Blocks() as demo:
     gr.Markdown(
         "<h1 style='text-align: center; margin-bottom: 32px;'>Emotion Recognition from Video</h1>"
     ),
-    gr.Markdown(
-        "<p style='text-align: center; margin-bottom: 20px;'>Upload a video to analyze the emotions displayed.</p>"
-    ),
-    gr.Markdown(
-        "<p style='text-align: center; margin-bottom: 20px;'>This tool will provide a detailed analysis including visualizations and a downloadable report.</p>"
-    ),
+    gr.Image(logo, show_label=False, interactive=False, height=165, show_download_button=False, show_fullscreen_button=False),
     
-    gr.Image(logo,show_label=False ,interactive=False, height=165,show_download_button=False,show_fullscreen_button=False,show_share_button=False),
-    gr_interface.render()
-# Launch the interface
+    gr.Markdown(
+        "<h2 style='text-align: center; margin-bottom: 20px;'>Upload a video from Webcam to analyze the emotions displayed.</h2>"
+    ),
+    gr.Markdown(
+        "<h3 style='text-align: center; margin-bottom: 20px;'>This tool will provide a detailed analysis including visualizations and a downloadable report.</h3>"
+    ),
+    gr.Markdown(
+        "<h3 style='text-align: center; margin-bottom: 20px;color: blue;'>This tool is developed by Dirdh Patel(U2366489) for MSc dissertation purposes at the University of Huddersfield under the supervision of Dr.Tianhua Chen.</h3>"
+    ),
+    gr_interface.render(),
+    
+
 demo.launch(show_error=True)
 
 
