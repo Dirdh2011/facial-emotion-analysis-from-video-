@@ -8,4 +8,3 @@ tensorflow
 gradio
 fpdf
 keras
-sklearn
