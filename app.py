@@ -301,7 +301,7 @@ gr_interface = gr.Interface(
 # Create a Gradio layout with custom CSS
 with gr.Blocks() as demo:
     gr.Markdown(
-        "<h1 style='text-align: center; margin-bottom: 64px;'>Emotion Recognition from Video</h1>"
+        "<h1 style='text-align: center; margin-bottom: 32px;'>Emotion Recognition from Video</h1>"
     ),
     gr.Image(logo, show_label=False, interactive=False, height=165, show_download_button=False, show_fullscreen_button=False),
     
