@@ -295,7 +295,7 @@ gr_interface = gr.Interface(
     outputs=outputs,
     article='This tool is developed by Dirdh Patel(U2366489) for MSc dissertation purposes at the University of Huddersfield Under the supervision of Dr.Tianhua Chen.',
     allow_flagging="never",
-    live=False,  # Ensure the video is completely uploaded before processing
+    live=True,  # Ensure the video is completely uploaded before processing
 )
 
 # Create a Gradio layout with custom CSS
