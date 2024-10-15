@@ -102,7 +102,11 @@ The system has been extensively tested and achieved the following:
 - Improve real-time emotion detection for live video feeds.
 
 ---
+## **Live Demo**
+You can explore the live demo of the system on Hugging Face Spaces:
+[**Facial Emotion Recognition - Hugging Face**](https://huggingface.co/spaces/dirdh2366489/Facialemotionreco)
 
+---
 ## **Acknowledgments**
 I would like to thank my supervisor, **Dr. Tianhua Chen**, for his guidance and support throughout this project. I also appreciate the **University of Huddersfield** for providing resources and encouragement during this research.
 
