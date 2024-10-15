@@ -51,7 +51,7 @@ To set up the project on your local machine, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/facial-emotion-recognition.git
+    git clone https://github.com/Dirdh2011/facial-emotion-recognition.git
     cd facial-emotion-recognition
     ```
 
