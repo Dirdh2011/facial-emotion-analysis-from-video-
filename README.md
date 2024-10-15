@@ -36,9 +36,10 @@ The flow of the system includes the following steps:
 4. **Emotion Prediction**: Uses **ResNet-50** for emotion detection.
 5. **Smoothing Algorithm**: Applied to smooth emotion transitions across frames.
 6. **Report Generation**: Generates CSV and PDF reports, along with visual graphs.
-
-![System Architecture](.\images\system flow.png)
-![Model trainning](.\images\trainning.png)
+**System Architecture**
+[System Architecture](./images/system flow.png)
+**Model trainning**
+[Model trainning](./images/trainning.png)
 
 ---
 
@@ -83,7 +84,7 @@ The system has been extensively tested and achieved the following:
 
 ### Example Outputs:
 - **Emotion Trends (Line Graph)**:
-  ![Emotion Trends](.\images\line_plot.png)
+  ![Emotion Trends](./images/line_plot.png)
   
 - **Bar Plot of Emotions**:
   ![Bar Plot](./images/bar_plot.png)
